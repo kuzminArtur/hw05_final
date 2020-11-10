@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Просмотр поста{% endblock %}
+{% block header %}Просмотр поста пользователя{% endblock %}
+{% block content %}
+    <main role="main" class="container">
+        <div class="row">
+            {% include "about_author.html" with author=post.author %}
+            <div class="col-md-9">
+                {% include "post_item.html" with post=post hide_comment_btn=hide_comment_btn %}
+                {% include "comments.html" with form=form %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

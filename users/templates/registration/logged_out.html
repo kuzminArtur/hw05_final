@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Вы вышли из системы{% endblock %}
+
+{% block content %}
+    {% include "info_card.html" with card_header="Вы вышли из системы" message="Вы вышли из своей учётной записи. Ждём вас снова!" %}
+{% endblock %}
