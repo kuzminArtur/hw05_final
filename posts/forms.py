@@ -18,6 +18,7 @@ class PostForm(ModelForm):
         help_texts = {
             'group': 'Выберите группу',
             'text': 'Введите текст поста',
+            'image': 'Выбранная картинка отобразится в посте',
         }
 
     def clean_text(self):

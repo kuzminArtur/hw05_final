@@ -169,7 +169,7 @@ class CommentCreate(LoginRequiredMixin, CreateView):
 def follow_index(request):
     """Представление ленты подписок."""
     post_list = Post.objects.filter(
-        author__following__user=request.user).order_by('-pub_date')
+        author__following__user=request.user)
     paginator = Paginator(post_list, 10)
 
     page_number = request.GET.get('page')
@@ -194,8 +194,8 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     """Представление обработчика отписки."""
-    author = get_object_or_404(User, username=username)
-    follow = get_object_or_404(Follow, user=request.user, author=author)
+    follow = get_object_or_404(Follow, user=request.user,
+                               author__username=username)
     follow.delete()
     return HttpResponseRedirect(reverse('profile',
                                         kwargs={'username': username}))
