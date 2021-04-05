@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
 
 from .models import Comment, Post
 
@@ -38,3 +38,6 @@ class CommentForm(ModelForm):
         fields = ['text']
         labels = {'test': 'Текст комментария'}
         help_texts = {'text': 'Введите текст комментария'}
+        widgets = {
+            'text': Textarea({'rows': 3}),
+        }

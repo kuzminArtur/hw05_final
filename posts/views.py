@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.core.paginator import Paginator
+from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -17,8 +18,9 @@ User = get_user_model()
 
 def index(request):
     """Представление для отображения главной страницы."""
-    post_list = Post.objects.select_related('author').select_related(
-        'group').order_by('-pub_date')
+    post_list = Post.objects.select_related('author', 'group').annotate(
+        posts_comments=Count('comments')).order_by('-pub_date')
+    # .annotate(posts_comments=Count('comments'))
     paginator = Paginator(post_list, 10)
 
     page_number = request.GET.get('page')

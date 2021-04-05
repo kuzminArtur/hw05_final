@@ -23,9 +23,10 @@
     {% endif %}
 
     <!-- Отображение ссылки на комментарии -->
-    {% if post.comments.exists %}
+    {% if post.posts_comments > 0 %}
+    {# if post.comments.exists #}
       <div class="text-muted">
-        Комментариев: {{ post.comments.count }}
+        Комментариев: {{ post.posts_comments }}
       </div>
     {% endif %}
     <div class="d-flex justify-content-between align-items-center">
